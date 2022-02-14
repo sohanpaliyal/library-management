@@ -1,0 +1,56 @@
+<div class="login-wrapper">
+  <div class="login-overlay"></div>
+  <div class="container d-flex justify-content-end align-items-center">
+
+    <div>
+      <mat-card class="py-5">
+        <!-- <div>
+          <pre *ngFor="let item of items | async">
+                    {{item | json}}
+                </pre>
+        </div> -->
+        <div class="login-form">
+          <div class="text-center">
+
+
+            <mat-card-title>
+              <span class="primary">Proceed to</span>
+              Login
+            </mat-card-title>
+            <img src="assets/images/book_icon.jpg" alt="" class="book_icon">
+          </div>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Mobile Number</mat-label>
+            <input type="tel" matInput placeholder="" [(ngModel)]="phoneNumber">
+            <mat-icon color="primary" matSuffix>phone</mat-icon>
+          </mat-form-field>
+          <div id="recaptcha-container">
+          </div>
+          <div class="text-center">
+            <button mat-raised-button color="primary" class="py-1 px-5" type="submit" id="recaptcha" (click)="getOtp()">Continue</button>
+
+            <!-- <p class="my-3">
+                <a href="">Forgotten Password?</a>
+              </p>
+              <button mat-raised-button color="accent" class="py-1 px-5" routerLink="/auth/sign-up">Create New
+                Account</button> -->
+          </div>
+
+
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>otp</mat-label>
+            <input type="text" matInput placeholder="" [(ngModel)]="otp">
+            <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                          Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                          Email is <strong>required</strong>
+                        </mat-error> -->
+            <mat-icon color="primary" matSuffix>phone</mat-icon>
+          </mat-form-field>
+          <button (click)="verifyOtp()"></button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
