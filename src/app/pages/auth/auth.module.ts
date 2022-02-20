@@ -9,7 +9,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonService } from 'src/app/@library/services/common.service';
-
+import { NgOtpInputModule } from  'ng-otp-input';
+import { OtpInputComponent } from './otp-input/otp-input.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import { CustomStepperComponent } from './custom-stepper/custom-stepper.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const routes: Routes = [
   {path: 'login',component: LoginComponent},
@@ -19,7 +26,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, OtpInputComponent, CustomStepperComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -28,7 +35,13 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
    FormsModule,
-   ReactiveFormsModule
+   NgOtpInputModule,
+   ReactiveFormsModule,
+   MatRadioModule,
+   MatDatepickerModule,
+   CdkStepperModule,
+   MatStepperModule,
+   MatNativeDateModule
   ]
 })
 export class AuthModule { }

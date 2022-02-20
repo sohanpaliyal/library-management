@@ -6,70 +6,21 @@
       <mat-card>
         <div class="login-form">
           <div class="text-center">
-
-
             <mat-card-title>
               <span class="primary">Proceed to</span>
               Signup
             </mat-card-title>
             <img src="assets/images/book_icon.jpg" alt="" class="book_icon">
+          </div>         
+
+          <div>
+            <app-custom-stepper></app-custom-stepper>
           </div>
 
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label>First Name</mat-label>
-            <input type="email" matInput placeholder="Ex. pat@example.com">
-            <mat-icon color="primary" matSuffix>account_circle</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Last Name</mat-label>
-            <input type="email" matInput placeholder="Ex. pat@example.com">
-            <mat-icon color="primary" matSuffix>account_circle</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Date Of Birth</mat-label>
-            <input type="email" matInput placeholder="Ex. pat@example.com">
-            <mat-icon color="primary" matSuffix>event</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Purpose</mat-label>
-            <input type="email" matInput placeholder="Ex. pat@example.com">
-            <mat-icon color="primary" matSuffix>feedback</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Address</mat-label>
-            <textarea matInput placeholder="Ex. pat@example.com"></textarea>
-            <mat-icon color="primary" matSuffix>address</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="Ex. pat@example.com">
-            <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                          Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                          Email is <strong>required</strong>
-                        </mat-error> -->
-            <mat-icon color="primary" matSuffix>email</mat-icon>
-          </mat-form-field>
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label>password</mat-label>
-            <input type="password" matInput placeholder="Ex. pat@example.com">
-            <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                          Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                          Email is <strong>required</strong>
-                        </mat-error> -->
-            <mat-icon color="primary" matSuffix>vpn_key</mat-icon>
-          </mat-form-field>
-          <div class="text-center">
-            <button mat-raised-button color="primary" class="py-1 px-5">Continue</button>
+          <div *ngIf="this.step2 &&role =='2'">
+            Owner
           </div>
+
         </div>
       </mat-card>
     </div>

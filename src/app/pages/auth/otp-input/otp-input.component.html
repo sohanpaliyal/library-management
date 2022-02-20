@@ -1,0 +1,15 @@
+
+            <div>
+              <p>Otp sended successfully</p>
+              <div>
+                <label for="">Enter OTP</label>
+                <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+                <div class="text-center my-3">
+                  <button (click)="verifyOtp()" 
+                            mat-raised-button
+                            color="primary"
+                            class="py-1 px-5">continue</button>
+                </div>
+              </div>
+            </div>
+        

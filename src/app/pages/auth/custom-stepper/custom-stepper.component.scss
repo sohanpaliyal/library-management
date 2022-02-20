@@ -1,0 +1,37 @@
+.mat-step-header.mat-horizontal-stepper-header{
+    display: none!important;
+}
+
+.upload-image{
+    border: 2px dotted ;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    padding: 10px 10px 0 10px;
+    height: 100px;
+    align-items: center;
+    cursor: pointer;
+    margin: 20px 0;
+   span{
+       font-size: 10px;
+   }
+}
+.uploaded-img{
+    width: 100px;
+    height: 100px;
+    margin-left: 15px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.remove-img{
+    position: absolute;
+    top: -20px;
+    right: -20px;
+}
+.mat-stepper-horizontal .mat-horizontal-stepper-header-container{
+      margin-bottom: 10px!important;
+  }
+  .mat-horizontal-stepper-header{
+      padding: 0 34px;
+  }
