@@ -4,6 +4,7 @@ import 'firebase/auth';
 import 'firebase/firestore'
 import firebase from 'firebase/app';
 import { Router } from '@angular/router';
+import { LoginService } from '../login/login.service';
 @Component({
   selector: 'app-otp-input',
   templateUrl: './otp-input.component.html',
@@ -23,8 +24,8 @@ export class OtpInputComponent implements OnInit {
     }
   }
   verify: any;
-  isOTPVerified: boolean = false;
-  constructor(private router:Router) { }
+  // isOTPVerified: boolean = false;
+  constructor(private router:Router,private loginService:LoginService) { }
 
   ngOnInit(): void {
     this.verify = localStorage.getItem('verificationId') || '{}'
@@ -35,8 +36,9 @@ export class OtpInputComponent implements OnInit {
     firebase.auth().signInWithCredential(credentials).then((response) => {
       console.log(response);
       localStorage.setItem("userDetailsFirebase", JSON.stringify(response))
-      this.isOTPVerified = true;
-      this.router.navigate(['/auth/sign-up'])
+      // this.isOTPVerified = true;
+      this.loginService.isOTPVerified.next(true);
+      // this.router.navigate(['/auth/sign-up'])
     })
   }
   onOtpChange(event: any) {

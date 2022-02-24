@@ -8,7 +8,7 @@
 
             <mat-card-title>
               <span class="primary">Proceed to</span>
-              Login
+            {{this.otpIsVerifiedNow ==true? 'Register':'Login'}}  
             </mat-card-title>
             <img src="assets/images/book_icon.jpg" alt="" class="book_icon">
           </div>
@@ -26,16 +26,16 @@
             </div>
           </div>
           <ng-template #OTPContainer>
-            <app-otp-input></app-otp-input>
+            <div *ngIf="!this.otpIsVerifiedNow">
+              <app-otp-input ></app-otp-input>   
+            </div>
           </ng-template>
 
 
 
-          <!-- <mat-form-field class="full-width" appearance="fill">
-            <mat-label>otp</mat-label>
-            <input type="text" matInput placeholder="" [(ngModel)]="otp">
-            <mat-icon color="primary" matSuffix>phone</mat-icon>
-          </mat-form-field> -->
+         <div *ngIf="this.otpIsVerifiedNow">
+          <app-register></app-register>
+         </div>
         </div>
       </mat-card>
     </div>

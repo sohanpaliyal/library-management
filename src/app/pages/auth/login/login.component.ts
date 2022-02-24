@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/@library/services/common.service';
 import firebase from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { WindowService } from 'src/app/@library/services/window.service';
+import { LoginService } from './login.service';
 var config = environment.firebase
 @Component({
   selector: 'app-login',
@@ -19,12 +20,16 @@ export class LoginComponent implements OnInit {
   windowRef:any;
   reChaptchaVerifier:any;
   isOTPSendedSuccessfully = false;
+  otpIsVerifiedNow: boolean = false;
   
   constructor(
     private fb:FormBuilder,
-    private windowService:WindowService) {
+    private windowService:WindowService,
+    private loginService:LoginService) {
       this.windowRef = this.windowService.windowRef;
-  
+      this.loginService.isOTPVerified.subscribe((result)=>{
+        this.otpIsVerifiedNow = result
+      })
    }
 
 getOtp(){

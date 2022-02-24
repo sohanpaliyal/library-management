@@ -20,7 +20,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 const routes: Routes = [
   {path: 'login',component: LoginComponent},
-  {path:'sign-up',component:RegisterComponent},
+  // {path:'sign-up',component:RegisterComponent},
   {path: '**',redirectTo: 'login',component: LoginComponent},
 ]
 
