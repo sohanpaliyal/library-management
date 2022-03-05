@@ -2,7 +2,7 @@
   <div class="login-overlay"></div>
   <div class="container d-flex justify-content-end align-items-center">
     <div>
-      <mat-card class="py-5">
+      <mat-card class="py-5 login-card">
         <div class="login-form">
           <div class="text-center">
 
@@ -13,17 +13,37 @@
             <img src="assets/images/book_icon.jpg" alt="" class="book_icon">
           </div>
           <div *ngIf="!this.isOTPSendedSuccessfully; else OTPContainer">
-            <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Mobile Number</mat-label>
-              <input type="tel" matInput placeholder="" [(ngModel)]="phoneNumber">
-              <mat-icon color="primary" matSuffix>phone</mat-icon>
-            </mat-form-field>
+            <form [formGroup]="form" (ngSubmit)="getOtp()" #myform="ngForm">
+              
+              <mat-form-field class="full-width mb-2" appearance="fill">
+                <mat-label>Mobile Number</mat-label>
+                <input 
+                    type="tel" 
+                    matInput  
+                    formControlName="phoneNumber" 
+                    [pattern]="'^[+]91[0-9]*$'" 
+                    placeholder="+911234567890"
+                    minlength="13"
+                    maxlength="13">
+                <mat-error 
+                  *ngIf="myform.submitted">
+                  <mat-icon class="me-2">error</mat-icon>
+                  <span *ngIf="this.form.get('phoneNumber').hasError('required') && myform.submitted">  Mobile number is <strong>Required</strong></span>
+                  <span *ngIf="this.form.get('phoneNumber').hasError('pattern') ||this.form.get('phoneNumber').hasError('maxlength') ||this.form.get('phoneNumber').hasError('minlength') && myform.submitted">Mobile Number is not <strong>Valid</strong></span>
+                </mat-error>
+                <mat-icon color="primary" matSuffix>phone</mat-icon>
+              </mat-form-field>
+
+              <div class="text-center">
+                <button mat-raised-button color="primary" class="py-1 px-5" type="submit" id="recaptcha"
+                  >Continue</button>
+              </div>
+
+            </form>
+           
             <!-- <div id="recaptcha-container">
             </div> -->
-            <div class="text-center">
-              <button mat-raised-button color="primary" class="py-1 px-5" type="submit" id="recaptcha"
-                (click)="getOtp()">Continue</button>
-            </div>
+           
           </div>
           <ng-template #OTPContainer>
             <div *ngIf="!this.otpIsVerifiedNow">

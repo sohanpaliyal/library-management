@@ -17,6 +17,7 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
 import { CustomStepperComponent } from './custom-stepper/custom-stepper.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 const routes: Routes = [
   {path: 'login',component: LoginComponent},
@@ -41,7 +42,8 @@ const routes: Routes = [
    MatDatepickerModule,
    CdkStepperModule,
    MatStepperModule,
-   MatNativeDateModule
+   MatNativeDateModule,
+   MatSnackBarModule
   ]
 })
 export class AuthModule { }

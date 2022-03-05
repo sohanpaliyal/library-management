@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import 'firebase/auth';
 import 'firebase/firestore'
@@ -8,6 +8,7 @@ import firebase from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { WindowService } from 'src/app/@library/services/window.service';
 import { LoginService } from './login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 var config = environment.firebase
 @Component({
   selector: 'app-login',
@@ -15,47 +16,51 @@ var config = environment.firebase
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  phoneNumber:string ='';
+  form = this.fb.group({
+    phoneNumber:['',Validators.required]
+  })
+  // phoneNumber = new FormControl('', Validators.required);
   phoneSignIn = false;
-  windowRef:any;
-  reChaptchaVerifier:any;
+  windowRef: any;
+  reChaptchaVerifier: any;
   isOTPSendedSuccessfully = false;
   otpIsVerifiedNow: boolean = false;
-  
+
   constructor(
-    private fb:FormBuilder,
-    private windowService:WindowService,
-    private loginService:LoginService) {
-      this.windowRef = this.windowService.windowRef;
-      this.loginService.isOTPVerified.subscribe((result)=>{
-        this.otpIsVerifiedNow = result
-      })
-   }
-
-getOtp(){
-  this.reChaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha',{
-    size:'invisible'   
+    private fb: FormBuilder,
+    private windowService: WindowService,
+    private loginService: LoginService,
+    private snackBar:MatSnackBar) {
+    this.windowRef = this.windowService.windowRef;
+    this.loginService.isOTPVerified.subscribe((result) => {
+      this.otpIsVerifiedNow = result
+    })
   }
-  )
-  firebase.auth().signInWithPhoneNumber(this.phoneNumber,this.reChaptchaVerifier).then((response:any)=>{
-    console.log(response);
-    if(response){
-      this.phoneNumber = ''
-      localStorage.setItem('verificationId',response.verificationId);
-      this.isOTPSendedSuccessfully = true;
+
+  getOtp() {
+    console.log(this.form);
+    if (this.form.valid) {
+      this.reChaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha', {
+        size: 'invisible'
+      }
+      )
+      firebase.auth().signInWithPhoneNumber(this.form.get('phoneNumber').value, this.reChaptchaVerifier).then((response: any) => {
+        console.log(response);
+        if (response) {
+          this.form.reset()
+          localStorage.setItem('verificationId', response.verificationId);
+          this.isOTPSendedSuccessfully = true;
+        }
+
+      }).catch((err) => {
+        this.snackBar.open(err.message,'Okay',{duration:2000})
+
+      })
     }
-
-  }).catch((err)=>{
-    alert(err.message)
-
-  })
-}
+  }
 
   ngOnInit() {
     firebase.initializeApp(config)
   }
 
-  submit(){
-    // this.db.list('items').push({content:this.form.value})
-  }
 }
